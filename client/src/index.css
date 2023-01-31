@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+input{
+    @apply w-72 p-3  border border-solid border-gray-600
+}
+h1{
+    @apply text-2xl font-semibold
+}
+button{
+    
+}
