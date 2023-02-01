@@ -15,8 +15,9 @@
 
 ## How to use : 
 
-- make sure to create your own .env file in the backend folder and put the values respecting the .env.example file
+- make sure to create your own .env file in the backend folder and put the values respecting the .env.example file.
 - run ```npm i``` on both backend and client folders.
+- run ```npm run dev``` on the client folder and ```npm start``` on the server folder.
 - make sure to create a database that has this structure : 
 
 | COLUMN | ATTRIBUTES |
@@ -29,4 +30,4 @@
 
 ## LICENCE
 
-MIT
+MIT.
