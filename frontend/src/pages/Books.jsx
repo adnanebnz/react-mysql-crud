@@ -26,40 +26,46 @@ const Books = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-center text-3xl mb-9">My Bookshop</h1>
-      <div className="flex flex-1 gap-3">
+    <div className="p-4">
+      <h1 className="text-center text-3xl mb-6">My Bookshop</h1>
+      
+      <div className="flex gap-3">
         {books.map((book) => (
           <div
-            className="flex flex-1 flex-col gap-2 items-center"
+            className="flex flex-col gap-2 items-center justify-center px-3 mt-2 "
             key={book.id}
           >
             {book.cover && (
               <img
                 src={book.cover}
-                className="w-72 h-80 object-cover bg-red-500"
+                alt=""
+                className="object-cover" height="200px" width="200px"
               />
             )}
             <h2>{book.title}</h2>
             <p>{book.desc}</p>
             <span>{book.price}</span>
+            <div className="inline-flex rounded-md shadow-sm gap-1" role="group">
+            <button className="px-4 py-2 text-sm font-medium text-gray-300 bg-slate-900 border border-gray-200 rounded-lg hover:bg-slate-800 hover:text-green-500 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
+              <Link to={`/update/${book.id}`}>Update</Link>
+            </button>
             <button
-              className="py-3 px-6 bg-white cursor-pointer text-red-500 border border-solid border-gray-400"
+              className="px-4 py-2 text-sm font-medium text-gray-300 bg-slate-900 border border-gray-200 rounded-lg hover:bg-slate-800 hover:text-red-500 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
               onClick={() => handleDelete(book.id)}
             >
               Delete
             </button>
-            <button className="py-3 px-6 bg-white cursor-pointer text-indigo-700 border border-solid border-gray-400">
-              <Link to={`/update/${book.id}`}>Update</Link>
-            </button>
+            </div>
           </div>
         ))}
       </div>
-      <div>
-        {" "}
+      <div className="flex items-center justify-center">
         <button className="border border-solid border-gray-400 p-4 mt-10 ">
           <Link to={"/add"}>Add New Book</Link>
         </button>
+
+
+        
       </div>
     </div>
   );

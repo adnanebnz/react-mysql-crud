@@ -5,7 +5,7 @@ import UpdateBook from "./pages/UpdateBook";
 
 function App() {
   return (
-    <div className="h-screen py-0 px-10 flex items-center justify-center text-center">
+    <div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Books />} />
