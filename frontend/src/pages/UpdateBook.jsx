@@ -58,9 +58,10 @@ const UpdateBook = () => {
           name="title"
           onChange={handleChange}
         />
-        <input
+       <textarea
           type="text"
           placeholder="insert book description"
+          className="h-40 p-3 border border-solid border-black"
           required
           name="desc"
           onChange={handleChange}
