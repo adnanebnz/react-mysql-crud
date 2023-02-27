@@ -2,7 +2,8 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 const mysql = require("mysql");
-
+const path = require("path");
+const multer = require("multer");
 const db = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
@@ -13,6 +14,19 @@ const db = mysql.createConnection({
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(express.static("Images"));
+app.use("/images", express.static("Images"));
+//MULTER CONFIG
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "Images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 
 app.get("/books", (req, res) => {
   const q = "SELECT * FROM books";
@@ -31,13 +45,14 @@ app.get("/books/:id", (req, res) => {
   });
 });
 
-app.post("/books", (req, res) => {
+app.post("/books", upload.single("cover"), (req, res) => {
+  const url = req.protocol + "://" + req.get("host");
   const q = "INSERT INTO books (`title`,`desc`,`price`,`cover`) VALUES (?)";
   const values = [
     req.body.title,
     req.body.desc,
     req.body.price,
-    req.body.cover,
+    url + "/Images/" + req.file.filename,
   ];
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err);
@@ -54,13 +69,14 @@ app.delete("/books/:id", (req, res) => {
   });
 });
 
-app.put("/books/:id", (req, res) => {
+app.put("/books/:id", upload.single("cover"), (req, res) => {
   const bookId = req.params.id;
+  const url = req.protocol + "://" + req.get("host");
   const values = [
     req.body.title,
     req.body.desc,
     req.body.price,
-    req.body.cover,
+    url + "/Images/" + req.file.filename,
   ];
   const q =
     "UPDATE books SET `title` = ? ,`desc` = ? ,`price` = ? ,`cover` = ? WHERE id = ?";
