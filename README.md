@@ -3,7 +3,6 @@
 
 ![React CRUD MySQL](https://res.cloudinary.com/dxobgdfyq/image/upload/w_700/v1675263079/project1_wjunxw.png)
 
-![TEST](https://api.travis-ci.org/joemccann/dillinger.svg?branch=master&status=passed)
 
 ## Features
 
